@@ -1,8 +1,5 @@
 const letter = require('./letter.js')
 
-// let temp = new letter("A")
-// console.log(temp)
-
 function Word(theWord) {
     let theArray = []
     for (let i = 0; i < theWord.length; i++) {
@@ -13,13 +10,12 @@ function Word(theWord) {
     this.display = () => {
         let wordString = ''
         this.myWord.forEach(elem => {
-            wordString += elem.toString()
+            wordString += elem + " "
         })
         return wordString
     }
     this.guessLetter = (char) => {
         this.myWord.forEach(elem => elem.makeGuess(char) )
-
     }
 }
 
