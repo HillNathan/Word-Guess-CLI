@@ -6,6 +6,8 @@ const fs = require("fs")
 // set up the state object to track game data
 let state = {
     guessesLeft: 10,
+    wrongLetters: [],
+    wrongLetterString: ''
 }
 
 // set up the list of words the game will select from for the user to try to guess
@@ -27,6 +29,10 @@ const guessingGame = () => {
     if (state.guessesLeft === 10) console.log(`| you have ${state.guessesLeft} wrong guesses left. |`)
     else console.log(`| you have ${state.guessesLeft} wrong guesses left.  |`)
     console.log('|=================================|')
+    console.log('\nWrong Letters:')
+    if(state.wrongLetters.length === 0) console.log('\n')
+    else console.log(state.wrongLetterString)
+    console.log('-----------------------------------')
     console.log('\n')
     console.log(myNewWord.display())
     console.log('\n')
@@ -56,6 +62,7 @@ const guessingGame = () => {
                 }
                 else {
                     // if the guess was wrong then call the function after decrement to the wrong guess counter
+                    if(!state.wrongLetters.includes(theGuess.myGuess.toUpperCase())) addWrong(theGuess.myGuess.toUpperCase())
                     state.guessesLeft--
                     guessingGame()
                 }
@@ -68,3 +75,14 @@ const guessingGame = () => {
 }
 // initial function call to start the game
 guessingGame()
+
+const addWrong = (letter) => {
+    if (state.wrongLetters.length === 0) {
+        state.wrongLetters[0] = letter.toUpperCase()
+        state.wrongLetterString = letter.toUpperCase()
+    }
+    else {
+        state.wrongLetters.push(letter.toUpperCase())
+        state.wrongLetterString += (", " + letter.toUpperCase())
+    }
+}
