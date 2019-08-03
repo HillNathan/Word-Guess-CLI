@@ -77,6 +77,8 @@ const guessingGame = () => {
 guessingGame()
 
 const addWrong = (letter) => {
+    // function for tracking wrong guesses in the state.wrongLetters array, and a display string for 
+    //  displaying the wrong letters. 
     if (state.wrongLetters.length === 0) {
         state.wrongLetters[0] = letter.toUpperCase()
         state.wrongLetterString = letter.toUpperCase()
